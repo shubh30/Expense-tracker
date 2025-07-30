@@ -1,8 +1,14 @@
 import React from "react";
-import Layout from "./Components/Layout";
+import Dashboard from "./Components/Dashboard";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
-  return <Layout />;
+  return (
+    <Provider store={store}>
+      <Dashboard />
+    </Provider>
+  );
 }
 
 export default App;
