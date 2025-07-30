@@ -1,11 +1,14 @@
-import "./style.css"
+import {
+  headerStyle,
+  titleStyle
+} from "./style"
 
 const Header = () => {
 
   return (
-    <header className="header"
+    <header css={headerStyle}
     >
-      <h1 className='h1'>Expense Tracker</h1>
+      <h1 css={titleStyle}>Expense Tracker</h1>
     </header>
   );
 };

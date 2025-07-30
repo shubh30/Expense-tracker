@@ -1,69 +1,71 @@
-.card {
+import { css } from '@emotion/react';
+
+export const card = css`
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
   overflow: hidden;
-}
+`;
 
-.card-header {
+export const cardHeader = css`
   padding: 1.5rem;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
-}
+`;
 
-.card-title {
+export const cardTitle = css`
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
+`;
 
-.card-content {
+export const cardContent = css`
   padding: 1.5rem;
-}
+`;
 
-.form {
+export const form = css`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
+`;
 
-.form-group {
+export const formGroup = css`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
+`;
 
-.form-label {
+export const formLabel = css`
   font-weight: 500;
   color: #374151;
   font-size: 0.875rem;
-}
+`;
 
-.form-input,
-.form-select {
+export const formInput = css`
   padding: 0.75rem;
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
-}
 
-.form-input:focus,
-.form-select:focus {
-  outline: none;
-  border-color: #3b82f6;
-}
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+  }
+`;
 
-.form-actions {
+export const formSelect = formInput;
+
+export const formActions = css`
   display: flex;
-  gap: 0.5rem
-}
+  gap: 0.5rem;
+`;
 
-.btn {
+export const btn = css`
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -77,9 +79,9 @@
   gap: 0.5rem;
   text-decoration: none;
   flex: 1;
-}
+`;
 
-.btn-primary {
+export const btnPrimary = css`
   background: #3b82f6;
   color: white;
-}
+`;
