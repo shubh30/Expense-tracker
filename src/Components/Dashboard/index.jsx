@@ -1,13 +1,16 @@
 import Header from "../Header";
 import ExpenseForm from "../ExpenseForm";
 
-import "./style.css";
+import {
+  appContainer,
+  container
+} from "./style.js";
 
 const Layout = () => {
   return (
-    <div className="app-container">
+    <div css={appContainer}>
       <Header />
-      <main className="container">
+      <main css={container}>
         <ExpenseForm />
       </main>
     </div>

@@ -1,7 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addExpense } from "../../store/slices/expensesSlice";
-import "./style.css";
+import {
+  card,
+  cardHeader,
+  cardTitle,
+  cardContent,
+  form,
+  formGroup,
+  formLabel,
+  formInput,
+  formSelect,
+  formActions,
+  btn,
+  btnPrimary
+} from "./style.js";
 
 const ExpenseForm = () => {
   const [formData, setFormData] = useState({
@@ -27,14 +40,14 @@ const ExpenseForm = () => {
   };
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <h3 className="card-title">Add New Expense</h3>
+    <div css={card}>
+      <div css={cardHeader}>
+        <h3 css={cardTitle}>Add New Expense</h3>
       </div>
-      <div className="card-content">
-        <form onSubmit={handleSubmit} className="form">
-          <div className="form-group">
-            <label htmlFor="date" className="form-label">
+      <div css={cardContent}>
+        <form onSubmit={handleSubmit} css={form}>
+          <div css={formGroup}>
+            <label htmlFor="date" css={formLabel}>
               Date
             </label>
             <input
@@ -44,12 +57,12 @@ const ExpenseForm = () => {
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, date: e.target.value }))
               }
-              className="form-input"
+              css={formInput}
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="description" className="form-label">
+          <div css={formGroup}>
+            <label htmlFor="description" css={formLabel}>
               Description
             </label>
             <input
@@ -63,12 +76,12 @@ const ExpenseForm = () => {
                 }))
               }
               placeholder="Enter expense description"
-              className="form-input"
+              css={formInput}
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="category" className="form-label">
+          <div css={formGroup}>
+            <label htmlFor="category" css={formLabel}>
               Category
             </label>
             <select
@@ -77,7 +90,7 @@ const ExpenseForm = () => {
               onChange={(e) =>
                 setFormData((prev) => ({ ...prev, category: e.target.value }))
               }
-              className="form-select"
+              css={formSelect}
               required
             >
               <option value="">Select a category</option>
@@ -89,8 +102,8 @@ const ExpenseForm = () => {
             </select>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="amount" className="form-label">
+          <div css={formGroup}>
+            <label htmlFor="amount" css={formLabel}>
               Amount
             </label>
             <input
@@ -103,15 +116,15 @@ const ExpenseForm = () => {
                 setFormData((prev) => ({ ...prev, amount: e.target.value }))
               }
               placeholder="0.00"
-              className="form-input"
+              css={formInput}
               required
             />
           </div>
 
-          <div className="form-actions">
+          <div css={formActions}>
             <button
               type="submit"
-              className="btn btn-primary"
+              css={[btn, btnPrimary]}
             >
               Add Expense
             </button>
