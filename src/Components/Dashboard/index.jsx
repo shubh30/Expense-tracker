@@ -1,9 +1,11 @@
 import Header from "../Header";
 import ExpenseForm from "../ExpenseForm";
+import ExpenseList from "../ExpenseList";
 
 import {
   appContainer,
-  container
+  container,
+  grid
 } from "./style.js";
 
 const Layout = () => {
@@ -11,7 +13,10 @@ const Layout = () => {
     <div css={appContainer}>
       <Header />
       <main css={container}>
-        <ExpenseForm />
+        <div css={grid}>
+          <ExpenseForm />
+          <ExpenseList />
+        </div>
       </main>
     </div>
   );

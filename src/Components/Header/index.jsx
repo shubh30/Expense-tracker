@@ -4,7 +4,6 @@ import {
 } from "./style"
 
 const Header = () => {
-
   return (
     <header css={headerStyle}
     >
