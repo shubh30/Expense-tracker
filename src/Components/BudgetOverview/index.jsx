@@ -16,15 +16,10 @@ import { BUDGET_KEY } from "../../constants";
 
 const BudgetOverview = () => {
   const dispatch = useDispatch();
-  const { expenses, selectedMonth, monthlyBudget } = useSelector(
-    ({ expenses, budget }) => {
-      return {
-        expenses: expenses.expenses,
-        selectedMonth: expenses.selectedMonth,
-        monthlyBudget: budget.monthlyBudget,
-      };
-    }
-  );
+  const expenses = useSelector((state) => state.expenses.expenses);
+  const selectedMonth = useSelector((state) => state.expenses.selectedMonth);
+  const monthlyBudget = useSelector((state) => state.budget.monthlyBudget);
+
   const { setItems, getItems } = useLocalStorage();
   const [isInitialized, setIsInitialized] = useState(false);
 

@@ -19,7 +19,11 @@ const ExpenseForm = ({ editingExpense, onCancel }) => {
   const selectedMonth = useSelector((state) => state.categories.selectedMonth);
 
   const [formData, setFormData] = useState({
-    date: editingExpense?.date || `${selectedMonth}-01`,
+    date:
+      editingExpense?.date ||
+      (selectedMonth
+        ? `${selectedMonth}-01`
+        : new Date().toISOString().split("T")[0]),
     description: editingExpense?.description || "",
     category: editingExpense?.category || "",
     amount: editingExpense?.amount?.toString() || "",
@@ -56,7 +60,9 @@ const ExpenseForm = ({ editingExpense, onCancel }) => {
         })
       );
       setFormData({
-        date: `${selectedMonth}-01`,
+        date: selectedMonth
+          ? `${selectedMonth}-01`
+          : new Date().toISOString().split("T")[0],
         description: "",
         category: "",
         amount: "",

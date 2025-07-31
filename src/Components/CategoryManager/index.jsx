@@ -22,13 +22,9 @@ import CategoryModal from "./CategoryModal";
 
 const CategoryManager = () => {
   const dispatch = useDispatch();
-  const { categories, expenses } = useSelector((state) => {
-    const { categories, expenses } = state;
-    return {
-      categories: categories.categories,
-      expenses: expenses.expenses,
-    };
-  });
+  const categories = useSelector((state) => state.categories.categories);
+  const expenses = useSelector((state) => state.expenses.expenses);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const [formData, setFormData] = useState({

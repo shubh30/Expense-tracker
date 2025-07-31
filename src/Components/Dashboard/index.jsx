@@ -26,13 +26,8 @@ import { loadCategories } from "../../store/slices/categoriesSlice.js";
 
 const Layout = () => {
   const dispatch = useDispatch();
-  const { expenses, categories } = useSelector((state) => {
-    const { expenses, categories } = state;
-    return {
-      expenses: expenses.expenses,
-      categories: categories.categories,
-    };
-  });
+  const expenses = useSelector((state) => state.expenses.expenses);
+  const categories = useSelector((state) => state.categories.categories);
 
   const { setItems, getItems } = useLocalStorage();
   const [activeTab, setActiveTab] = useState(TABS[0] || "Expenses");

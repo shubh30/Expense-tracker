@@ -8,11 +8,7 @@ import { useSelector } from "react-redux";
 import { form, formGroup, formInput, formLabel, action } from "./style";
 
 const UpdateBudget = ({ onModalClose, dispatch }) => {
-  const { monthlyBudget } = useSelector(({ budget }) => {
-    return {
-      monthlyBudget: budget.monthlyBudget,
-    };
-  });
+  const monthlyBudget = useSelector((state) => state.budget.monthlyBudget);
   const [newBudget, setNewBudget] = useState(monthlyBudget.toString());
 
   const handleBudgetUpdate = () => {
