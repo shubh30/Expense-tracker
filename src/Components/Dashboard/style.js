@@ -18,3 +18,7 @@ export const grid = css`
     grid-template-columns: repeat(2, 1fr);
   }
 `;
+
+export const budgetOverviewContainer = css`
+  margin-bottom: 1.5rem;
+`;

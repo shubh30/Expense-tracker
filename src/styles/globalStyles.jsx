@@ -69,6 +69,14 @@ const globalStyles = css`
 
   .grid {
     display: grid;
+    gap: 1.5rem;
+  }
+
+  .grid-4 {
+    grid-template-columns: 1fr;
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 `;
 
