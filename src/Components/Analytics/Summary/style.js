@@ -52,3 +52,8 @@ export const totalItem = css`
   background: #f3f4f6;
   font-weight: 600;
 `;
+
+export const cardStyle = css`
+  max-height: 550px;
+  overflow-y: scroll;
+`;

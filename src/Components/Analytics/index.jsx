@@ -1,20 +1,17 @@
 import React, { useMemo } from "react";
 import Summary from "./Summary";
+import Chart from "./Chart";
+import Card from "../Card";
+
 import { useSelector } from "react-redux";
 
-const Analytics = () => {
-  const { categories, expenses, selectedMonth } = useSelector((state) => {
-    const {
-      expenses: { expenses, selectedMonth },
-      categories: { categories },
-    } = state;
+import { emptyState } from "./style";
 
-    return {
-      expenses,
-      categories,
-      selectedMonth,
-    };
-  });
+const Analytics = () => {
+  const expenses = useSelector((state) => state.expenses.expenses);
+  const categories = useSelector((state) => state.categories.categories);
+  const selectedMonth = useSelector((state) => state.expenses.selectedMonth);
+
   const chartData = useMemo(() => {
     const monthlyExpenses = expenses.filter((expense) =>
       expense.date.startsWith(selectedMonth)
@@ -40,8 +37,23 @@ const Analytics = () => {
   }, [expenses, categories, selectedMonth]);
 
   const totalSpent = chartData.reduce((sum, item) => sum + item.value, 0);
+
+  if (chartData.length === 0) {
+    return (
+      <Card title="Category Breakdown">
+        <div css={emptyState}>
+          <p>
+            No expenses found for this month. Add some expenses to see
+            analytics!
+          </p>
+        </div>
+      </Card>
+    );
+  }
+
   return (
-    <div>
+    <div className="grid grid-2">
+      <Chart chartData={chartData} totalSpent={totalSpent} />
       <Summary chartData={chartData} totalSpent={totalSpent} />
     </div>
   );

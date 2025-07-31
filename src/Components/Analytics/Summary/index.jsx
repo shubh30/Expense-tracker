@@ -10,11 +10,12 @@ import {
   highlightedText,
   text,
   totalItem,
+  cardStyle,
 } from "./style";
 
 const Summary = ({ chartData, totalSpent }) => {
   return (
-    <Card title="Category Summary">
+    <Card title="Category Summary" style={cardStyle}>
       <div css={summaryList}>
         {chartData.map((category) => (
           <div key={category} css={categoryItem}>
