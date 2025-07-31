@@ -78,6 +78,13 @@ const globalStyles = css`
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 `;
 
 export const GlobalStyles = () => <Global styles={globalStyles} />;

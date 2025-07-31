@@ -133,7 +133,9 @@ const BudgetOverview = () => {
         </Card>
         <Card title="Daily Allowance">
           <div css={budgetStats}>
-            <p css={budgetAmount()}>{monthlyStats.dailyAllowance.toFixed(2)}</p>
+            <p css={budgetAmount()}>
+              ${monthlyStats.dailyAllowance.toFixed(2)}
+            </p>
             <p css={budgetSubTitle}>
               {monthlyStats.isCurrentMonth
                 ? `${monthlyStats.daysRemaining} days left`
