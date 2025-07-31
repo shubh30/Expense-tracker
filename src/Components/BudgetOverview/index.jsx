@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Card from "../Card";
-import Modal from "../Modal";
+import UpdateBudget from "./UpdateBudget";
 
 import {
   budgetStats,
@@ -8,15 +8,10 @@ import {
   budgetSubTitle,
   editBtnStyle,
   cardStyle,
-  form,
-  formGroup,
-  formInput,
-  formLabel,
-  action,
 } from "./style";
 import useLocalStorage from "../../hooks/useLocalStorage.js";
 import { useDispatch, useSelector } from "react-redux";
-import { loadBudget, setMonthlyBudget } from "../../store/slices/budgetSlice";
+import { loadBudget } from "../../store/slices/budgetSlice";
 import { BUDGET_KEY } from "../../constants";
 
 const BudgetOverview = () => {
@@ -47,7 +42,6 @@ const BudgetOverview = () => {
     }
   }, [monthlyBudget, isInitialized, setItems]);
 
-  const [newBudget, setNewBudget] = useState(monthlyBudget.toString());
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const monthlyStats = useMemo(() => {
@@ -87,14 +81,6 @@ const BudgetOverview = () => {
   }, [expenses, selectedMonth, monthlyBudget]);
 
   const onModalClose = () => setIsModalOpen(false);
-
-  const handleBudgetUpdate = () => {
-    const budget = Number.parseFloat(newBudget);
-    if (!isNaN(budget) && budget > 0) {
-      dispatch(setMonthlyBudget(budget));
-      onModalClose();
-    }
-  };
 
   return (
     <>
@@ -145,46 +131,7 @@ const BudgetOverview = () => {
         </Card>
       </div>
       {isModalOpen && (
-        <Modal onClose={onModalClose} title="Update Monthly Budget">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleBudgetUpdate();
-            }}
-            css={form}
-          >
-            <div css={formGroup}>
-              <label htmlFor="budget" css={formLabel}>
-                Budget Amount
-              </label>
-              <input
-                id="budget"
-                type="number"
-                value={newBudget}
-                onChange={(e) => setNewBudget(e.target.value)}
-                placeholder="Enter budget amount"
-                css={formInput}
-                required
-              />
-              <div css={action}>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  style={{ flex: 1 }}
-                >
-                  Update Budget
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={onModalClose}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </form>
-        </Modal>
+        <UpdateBudget onModalClose={onModalClose} dispatch={dispatch} />
       )}
     </>
   );
