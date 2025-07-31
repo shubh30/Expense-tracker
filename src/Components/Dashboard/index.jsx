@@ -6,6 +6,7 @@ import ExpenseForm from "../ExpenseForm";
 import ExpenseList from "../ExpenseList";
 import BudgetOverview from "../BudgetOverview";
 import CategoryManager from "../CategoryManager";
+import Analytics from "../Analytics";
 
 import useLocalStorage from "../../hooks/useLocalStorage.js";
 import { loadExpenses } from "../../store/slices/expensesSlice.js";
@@ -70,6 +71,11 @@ const Layout = () => {
     Categories: (
       <div>
         <CategoryManager />
+      </div>
+    ),
+    Analytics: (
+      <div>
+        <Analytics />
       </div>
     ),
   };

@@ -11,7 +11,7 @@ export const DEFAULT_CATEGORIES = [
   { id: "6", name: "Health", color: "#10b981", isDefault: true },
 ];
 
-export const TABS = ["Expenses", "Categories"];
+export const TABS = ["Expenses", "Analytics", "Categories"];
 
 export const PRESET_COLORS = [
   "#ef4444",
