@@ -123,7 +123,7 @@ const BudgetOverview = () => {
         </Card>
         <Card title="Remaining">
           <div css={budgetStats}>
-            <p css={budgetAmount(monthlyStats.remaining < 0)}>
+            <p css={budgetAmount(monthlyStats.remaining < 0, "#10b981")}>
               ${monthlyStats.remaining.toFixed(2)}
             </p>
             <p css={budgetSubTitle}>

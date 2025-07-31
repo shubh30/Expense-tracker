@@ -32,9 +32,17 @@ const expensesSlice = createSlice({
     loadExpenses: (state, action) => {
       state.expenses = action.payload;
     },
+    setSelectedMonth: (state, action) => {
+      state.selectedMonth = action.payload;
+    },
   },
 });
 
-export const { addExpense, deleteExpense, updateExpense, loadExpenses } =
-  expensesSlice.actions;
+export const {
+  addExpense,
+  deleteExpense,
+  updateExpense,
+  loadExpenses,
+  setSelectedMonth,
+} = expensesSlice.actions;
 export default expensesSlice.reducer;

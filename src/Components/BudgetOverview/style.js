@@ -6,11 +6,11 @@ export const budgetStats = css`
   gap: 0.5rem;
 `;
 
-export const budgetAmount = (isOverBudget = false) => css`
+export const budgetAmount = (isOverBudget = false, color = "#1e293b") => css`
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
-  color: ${isOverBudget ? "#ef4444" : "#1e293b"};
+  color: ${isOverBudget ? "#ef4444" : color};
 `;
 
 export const budgetSubTitle = css`
