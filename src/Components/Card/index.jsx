@@ -1,18 +1,8 @@
-import {
-  card,
-  cardContent,
-  cardHeader,
-  cardTitle,
-  count
-} from "./style.js"
+import { card, cardContent, cardHeader, cardTitle, count } from "./style.js";
 
-const Card = ({
-  title,
-  extraInfo,
-  children
-}) => {
+const Card = ({ title, extraInfo, style, children }) => {
   return (
-    <div css={card}>
+    <div css={[card, style]}>
       <div css={cardHeader}>
         <h3 css={cardTitle}>
           {title}
@@ -21,7 +11,7 @@ const Card = ({
       </div>
       <div css={cardContent}>{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

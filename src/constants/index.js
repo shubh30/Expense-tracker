@@ -1,4 +1,5 @@
 export const EXPENSES_KEY = "finance-dashboard-expenses";
+export const BUDGET_KEY = "finance-dashboard-budget";
 
 export const DEFAULT_CATEGORIES = [
   { id: "1", name: "Food", color: "#ef4444", isDefault: true },
