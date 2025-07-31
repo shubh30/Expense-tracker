@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../Header";
 import ExpenseForm from "../ExpenseForm";
 import ExpenseList from "../ExpenseList";
 import BudgetOverview from "../BudgetOverview";
-import CategoryManager from "../CategoryManager";
-import Analytics from "../Analytics";
+
+const CategoryManager = lazy(() => import("../CategoryManager"));
+const Analytics = lazy(() => import("../Analytics"));
 
 import useLocalStorage from "../../hooks/useLocalStorage.js";
 import { loadExpenses } from "../../store/slices/expensesSlice.js";
@@ -64,14 +65,18 @@ const Layout = () => {
       </div>
     ),
     Categories: (
-      <div>
-        <CategoryManager />
-      </div>
+      <Suspense fallback={<div>Loading Categories...</div>}>
+        <div>
+          <CategoryManager />
+        </div>
+      </Suspense>
     ),
     Analytics: (
-      <div>
-        <Analytics />
-      </div>
+      <Suspense fallback={<div>Loading Analytics...</div>}>
+        <div>
+          <Analytics />
+        </div>
+      </Suspense>
     ),
   };
 

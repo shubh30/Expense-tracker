@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import Card from "../Card";
-import UpdateBudget from "./UpdateBudget";
+
+const UpdateBudget = lazy(() => import("./UpdateBudget"));
 
 import {
   budgetStats,
@@ -126,7 +127,9 @@ const BudgetOverview = () => {
         </Card>
       </div>
       {isModalOpen && (
-        <UpdateBudget onModalClose={onModalClose} dispatch={dispatch} />
+        <Suspense fallback={<div />}>
+          <UpdateBudget onModalClose={onModalClose} dispatch={dispatch} />
+        </Suspense>
       )}
     </>
   );

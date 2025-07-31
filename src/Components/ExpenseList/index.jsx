@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExpense } from "../../store/slices/expensesSlice";
 
 import Card from "../Card";
-import ExpenseForm from "../ExpenseForm";
-import Modal from "../Modal";
 
 import {
   emptyState,
@@ -16,14 +14,16 @@ import {
   expenseDescription,
   expenseMeta,
   expenseActions,
-  expenseAmount
+  expenseAmount,
 } from "./style.js";
+
+const EditForm = lazy(() => import("./EditForm"));
 
 const ExpenseList = () => {
   const expenses = useSelector((state) => state.expenses.expenses || []);
   const categories = useSelector((state) => state.categories.categories);
   const dispatch = useDispatch();
-  const [editingExpense, setEditingExpense] = useState(null)
+  const [editingExpense, setEditingExpense] = useState(null);
 
   const getCategoryColor = (categoryName) => {
     const category = categories.find((cat) => cat.name === categoryName);
@@ -43,7 +43,7 @@ const ExpenseList = () => {
     }
   };
 
-  const onModalClose = () => setEditingExpense(null)
+  const onModalClose = () => setEditingExpense(null);
 
   return (
     <>
@@ -65,16 +65,16 @@ const ExpenseList = () => {
                       }}
                     />
                     <div css={expenseDetails}>
-                      <h4 css={expenseDescription}>
-                        {expense.description}
-                      </h4>
+                      <h4 css={expenseDescription}>{expense.description}</h4>
                       <p css={expenseMeta}>
                         {expense.category} • {formatDate(expense.date)}
                       </p>
                     </div>
                   </div>
                   <div css={expenseActions}>
-                    <span css={expenseAmount}>${expense.amount.toFixed(2)}</span>
+                    <span css={expenseAmount}>
+                      ${expense.amount.toFixed(2)}
+                    </span>
                     <button
                       className="btn btn-ghost btn-icon"
                       onClick={() => setEditingExpense(expense)}
@@ -98,15 +98,12 @@ const ExpenseList = () => {
       </Card>
 
       {editingExpense && (
-        <Modal
-          onClose={onModalClose}
-          title="Edit Expense"
-        >
-          <ExpenseForm
+        <Suspense fallback={<div />}>
+          <EditForm
+            onModalClose={onModalClose}
             editingExpense={editingExpense}
-            onCancel={onModalClose} 
           />
-        </Modal>
+        </Suspense>
       )}
     </>
   );
