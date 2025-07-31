@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExpense } from "../../store/slices/expensesSlice";
 
 import Card from "../Card";
+import ExpenseForm from "../ExpenseForm";
+import Modal from "../Modal";
 
 import {
   emptyState,
@@ -12,14 +15,15 @@ import {
   expenseDetails,
   expenseDescription,
   expenseMeta,
+  expenseActions,
+  expenseAmount
 } from "./style.js";
 
 const ExpenseList = () => {
   const expenses = useSelector((state) => state.expenses.expenses || []);
   const categories = useSelector((state) => state.categories.categories);
   const dispatch = useDispatch();
-
-  console.log(expenses);
+  const [editingExpense, setEditingExpense] = useState(null)
 
   const getCategoryColor = (categoryName) => {
     const category = categories.find((cat) => cat.name === categoryName);
@@ -38,6 +42,8 @@ const ExpenseList = () => {
       dispatch(deleteExpense(id));
     }
   };
+
+  const onModalClose = () => setEditingExpense(null)
 
   return (
     <>
@@ -67,20 +73,41 @@ const ExpenseList = () => {
                       </p>
                     </div>
                   </div>
-
-                  <button
-                    className="btn btn-danger btn-icon"
-                    onClick={() => handleDelete(expense.id)}
-                    title="Delete expense"
-                  >
-                    🗑️
-                  </button>
+                  <div css={expenseActions}>
+                    <span css={expenseAmount}>${expense.amount.toFixed(2)}</span>
+                    <button
+                      className="btn btn-ghost btn-icon"
+                      onClick={() => setEditingExpense(expense)}
+                      title="Edit expense"
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      className="btn btn-danger btn-icon"
+                      onClick={() => handleDelete(expense.id)}
+                      title="Delete expense"
+                    >
+                      🗑️
+                    </button>
+                  </div>
                 </div>
               );
             })}
           </div>
         )}
       </Card>
+
+      {editingExpense && (
+        <Modal
+          onClose={onModalClose}
+          title="Edit Expense"
+        >
+          <ExpenseForm
+            editingExpense={editingExpense}
+            onCancel={onModalClose} 
+          />
+        </Modal>
+      )}
     </>
   );
 };

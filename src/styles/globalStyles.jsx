@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/react';
+import { css, Global } from "@emotion/react";
 
 const globalStyles = css`
   *,
@@ -10,7 +10,7 @@ const globalStyles = css`
   }
 
   body {
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     background-color: #f8fafc;
     color: #1e293b;
     line-height: 1.6;
@@ -48,6 +48,17 @@ const globalStyles = css`
 
   .btn-danger:hover {
     background: #dc2626;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: #6b7280;
+    border: 1px solid #e5e7eb;
+  }
+
+  .btn-ghost:hover {
+    background: #f9fafb;
+    color: #374151;
   }
 
   .btn-icon {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addExpense } from "../../store/slices/expensesSlice";
+import { addExpense, updateExpense } from "../../store/slices/expensesSlice";
 
 import Card from "../Card";
 
@@ -10,18 +10,21 @@ import {
   formLabel,
   formInput,
   formSelect,
-  formActions
+  formActions,
 } from "./style.js";
 
-const ExpenseForm = () => {
-  const [formData, setFormData] = useState({
-    date: "",
-    description: "",
-    category: "",
-    amount: "",
-  });
+const ExpenseForm = ({ editingExpense, onCancel }) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.categories);
+  const selectedMonth = useSelector((state) => state.categories.selectedMonth);
+
+  const [formData, setFormData] = useState({
+    date: editingExpense?.date || `${selectedMonth}-01`,
+    description: editingExpense?.description || "",
+    category: editingExpense?.category || "",
+    amount: editingExpense?.amount?.toString() || "",
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,16 +39,33 @@ const ExpenseForm = () => {
     const amount = Number.parseFloat(formData.amount);
     if (isNaN(amount) || amount <= 0) return;
 
-    dispatch(
-      addExpense({
-        ...formData,
-        amount,
-      })
-    );
+    if (editingExpense) {
+      dispatch(
+        updateExpense({
+          ...editingExpense,
+          ...formData,
+          amount,
+        })
+      );
+      onCancel();
+    } else {
+      dispatch(
+        addExpense({
+          ...formData,
+          amount,
+        })
+      );
+      setFormData({
+        date: `${selectedMonth}-01`,
+        description: "",
+        category: "",
+        amount: "",
+      });
+    }
   };
 
   return (
-    <Card title="Add New Expense">
+    <Card title={editingExpense ? "Edit Expense" : "Add New Expense"}>
       <form onSubmit={handleSubmit} css={form}>
         <div css={formGroup}>
           <label htmlFor="date" css={formLabel}>
@@ -124,8 +144,17 @@ const ExpenseForm = () => {
 
         <div css={formActions}>
           <button type="submit" className="btn btn-primary">
-            Add Expense
+            {editingExpense ? "Update Expense" : "Add Expense"}
           </button>
+          {editingExpense && (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={onCancel}
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
     </Card>

@@ -59,3 +59,15 @@ export const expenseMeta = css`
   color: #6b7280;
   margin: 0;
 `;
+
+export const expenseActions = css`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+`;
+
+export const expenseAmount = css`
+  font-weight: 600;
+  margin-right: 0.5rem;
+`;
