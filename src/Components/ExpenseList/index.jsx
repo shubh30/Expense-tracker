@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExpense } from "../../store/slices/expensesSlice";
 
@@ -22,8 +22,15 @@ const EditForm = lazy(() => import("./EditForm"));
 const ExpenseList = () => {
   const expenses = useSelector((state) => state.expenses.expenses || []);
   const categories = useSelector((state) => state.categories.categories);
+  const selectedMonth = useSelector((state) => state.expenses.selectedMonth)
   const dispatch = useDispatch();
   const [editingExpense, setEditingExpense] = useState(null);
+
+  const monthlyExpenses = useMemo(() => {
+    return expenses
+      .filter((expense) => expense.date.startsWith(selectedMonth))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  }, [expenses, selectedMonth])
 
   const getCategoryColor = (categoryName) => {
     const category = categories.find((cat) => cat.name === categoryName);
@@ -47,14 +54,14 @@ const ExpenseList = () => {
 
   return (
     <>
-      <Card title="Recent Expenses" extraInfo={expenses.length}>
-        {expenses.length === 0 ? (
+      <Card title="Recent Expenses" extraInfo={monthlyExpenses.length}>
+        {monthlyExpenses.length === 0 ? (
           <div css={emptyState}>
             <p>No expenses found for this month</p>
           </div>
         ) : (
           <div css={expenseList}>
-            {expenses.map((expense) => {
+            {monthlyExpenses.map((expense) => {
               return (
                 <div css={expenseItem} key={expense.id}>
                   <div css={expenseInfo}>
