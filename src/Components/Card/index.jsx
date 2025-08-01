@@ -6,7 +6,7 @@ const Card = ({ title, extraInfo, style, children }) => {
       <div css={cardHeader}>
         <h3 css={cardTitle}>
           {title}
-          {extraInfo && <span css={count}>{extraInfo}</span>}
+          {(extraInfo !== undefined && extraInfo !== null) && <span css={count}>{extraInfo}</span>}
         </h3>
       </div>
       <div css={cardContent}>{children}</div>
